@@ -64,31 +64,9 @@
     <section class="pading-top">
         <div class="contenedor">
             <h2>Nuestros Servicios</h2>
-            <div class="servicios">
-                <?php 
-                    include ('includes/config/editor/db.php');
-                    $con = $conexion;
-                    $sql = "SELECT * FROM servicios";
-                    $query = mysqli_query($con,$sql);
-                    while($row = mysqli_fetch_array($query)): 
-                    ?>
-                <div class="servicio glass">
-                    <div class="contenido">
-                        <div class="img_service">
-                        <picture>
-                            <source srcset="data:image/webp;base64,<?php echo base64_encode($row['imagen']);?>" type="image/webp">
-                            <source srcset="data:image/jpg;base64,<?php echo base64_encode($row['imagen']);?>" type="image/jpg">
-                            <img src="data:image/jpg;base64,<?php echo base64_encode($row['imagen']);?>" alt="">
-                        </picture>
-                        </div><!--.img_service  -->
-                        <h3 class="titulo"><?= $row['nombre']?></h3>
-                        <p><?= $row['descr']?></p>
-                        <div class="btn">
-                            <a href="contacto.php" class="boton boton_secundario">Cotizar</a>
-                        </div>
-                    </div> <!--.contenido  -->
-                </div><!--.servicio  -->
-                <?php endwhile; ?>           
+            <div class="servicios" id="servicios">
+
+                  
             </div> <!--.servicios -->
         </div>
 </section>
@@ -98,4 +76,5 @@
 <!-- footer -->
 </body>
 <script src="build/js/bundle.min.js"></script>
+<script src="build/js/servicios.js"></script>
 </html>
