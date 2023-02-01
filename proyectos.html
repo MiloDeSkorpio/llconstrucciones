@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/4443851d27.js" crossorigin="anonymous"></script>
+    <link rel="shortcut icon" href="build/img/log.png" type="image/x-icon">
+    <link rel="stylesheet" href="build/css/app.css">
+    <title>LL Construcciónes | Proyectos</title>
+</head>
+<body class="dark-mode">
+    <div class="bg"></div>
+    <div class="bg bg2"></div>
+    <div class="bg bg3"></div>
+    <header class="header sombra">
+        <div class="logo">
+            <a href="index.html"><img src="/build/img/logo-ll.png" alt="logo dimaco"></a>
+        </div>
+        <div class="menu">
+            <div class="options">
+                <a href="index.html">
+                    <div class="option">
+                        <p>Inicio</p>
+                    </div>
+                </a>
+                <a href="nosotros.html">
+                    <div class="option">
+                        <p>Nosotros</p>
+                    </div>
+                </a>
+                <a href="renders.html">
+                    <div class="option">
+                        <p>Renders</p>
+                    </div>
+                </a>
+                <a href="proyectos.html">
+                    <div class="option">
+                        <p>Proyectos</p>
+                    </div>
+                </a>
+                <a href="contacto.html">
+                    <div class="option">
+                        <p>Contacto</p>
+                    </div>
+                </a>
+            </div>
+        </div> <!-- .menu -->
+        <div class="icon_menu">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </header>
+    <!-- header -->
+<main class="container">
+
+        <?php 
+            include ('includes/config/editor/db.php');
+            $con = $conexion;
+            $sql = "SELECT * FROM proyectos";
+            $query = mysqli_query($con,$sql);
+            while($row = mysqli_fetch_array($query)): 
+            ?>
+            <section class="pading-top">
+            <div class="obra glass">
+                <div class="datos">
+                    <h3>Nombre: <?= $row['nombre']?></h3>
+                    <label>Direción: <?= $row['direc']?></label>
+                    <label>Fecha de Inicio: <?= $row['f_ini']?></label>
+                    <label>Fecha de Finalización: <?= $row['f_fin']?> </label>
+                </div>
+                 <div class="galery">
+                 <?php
+                    for ($i = 1;$i <= 10 ; $i++) {  
+                     ?>
+                    <div class="galery-i ">
+                        <picture>
+                            <source srcset="data:image/jpg;base64,<?php echo base64_encode($row['img_'.$i]);?>" type="image/jpg">
+                            <img src="data:image/jpg;base64,<?php echo base64_encode($row['img_'.$i]);?>" alt="img-<?= $row['nombre']?>">
+                        </picture>
+                    </div> <!--.galery-i -->
+                <?php } ?>
+                </div> <!--.galery--> 
+            </div> <!-- .obra -->
+            </section>
+            <?php endwhile; ?>
+</main>
+<!-- footer -->
+</body>
+<script src="build/js/bundle.min.js"></script>
+</html>
