@@ -110,7 +110,7 @@ for (let i = 1; i<= 10;i++){
     
     galery.appendChild(imagen);
  }
-        console.log(obras);
+        
     });
 // }
 // function mostrarImagen(id) {
