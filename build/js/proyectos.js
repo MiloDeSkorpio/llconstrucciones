@@ -73,18 +73,20 @@ const proyectos = [
         imgRj: "/build/img/xalo-",
     }
 ]
+
+//crear obras
 const cont = document.getElementById("cont");
 const obras = document.getElementById('obras');
-    proyectos.forEach((proyectos) => {
-        let obras = document.createElement("section");
-        obras.classList.add("pading-top");
-        obras.setAttribute("id","obras")
-        cont.append(obras);
-        let obra = document.createElement("div");
-        obra.classList.add("obra");
-        obra.classList.add("glass");
-        obras.append(obra);
-        let datos = document.createElement("div");
+proyectos.forEach((proyectos) => {
+    let obras = document.createElement("section");
+    obras.classList.add("pading-top");
+    obras.setAttribute("id", "obras")
+    cont.append(obras);
+    let obra = document.createElement("div");
+    obra.classList.add("obra");
+    obra.classList.add("glass");
+    obras.append(obra);
+    let datos = document.createElement("div");
     datos.classList.add("datos");
     datos.innerHTML = `
         <h3>Nombre:${proyectos.nombre}</h3>
@@ -94,54 +96,40 @@ const obras = document.getElementById('obras');
     `
     obra.append(datos);
     let galery = document.createElement("div")
-galery.classList.add("galery");
-obra.append(galery);
+    galery.classList.add("galery");
+    obra.append(galery);
 
-for (let i = 1; i<= 10;i++){
-    const imagen = document.createElement("galery");
-    imagen.classList.add("galery-i")
-    imagen.innerHTML = ` 
-    <picture>
-    <source srcset="${proyectos.imgRw}${i}.webp" type="image/webp">
-    <source srcset="${proyectos.imgRj}${i}.jpg" type="image/jpg">
-    <img loading="lazy" src="${proyectos.imgRj}${i}.jpg" alt="imagen obra">
-    </picture>
-    `;
-    
-    galery.appendChild(imagen);
- }
+    for (let i = 1; i <= 10; i++) {
+        const imagen = document.createElement("galery");
+        imagen.classList.add("galery-i")
+        imagen.innerHTML = ` 
+        <picture>
+        <source srcset="${proyectos.imgRw}${i}.webp" type="image/webp">
+        <source srcset="${proyectos.imgRj}${i}.jpeg" type="image/jpeg">
+        <img loading="lazy" src="${proyectos.imgRj}${i}.webp" alt="imagen obra" id=${i}>
+        </picture>
+        `;
+
+        galery.appendChild(imagen);
+       
+        const overlay = document.querySelector('.overlay');
+        const imgSlide = document.querySelector('.img_slideshow');
+        imagen.addEventListener('click',function(e){
+            //obetner imagen
+            const imgId = e.target.id;
+            const imgSrc = e.target.getAttribute('src');
+            //mostrar overlayt al escuhar el evento clic
+            overlay.style.opacity = 1;
+            overlay.style.visibility = 'visible';
+            //asignar imagen al elemento img del overlay
+            imgSlide.setAttribute("src",imgSrc);
+            imgSlide.setAttribute("id",imgId);
+            //boton cerrar overlay
+            document.querySelector('.btn_cerrar').addEventListener('click',()=>{
+            overlay.style.opacity = 0;
+            overlay.style.visibility = 'hidden';
+            });
+        })
         
-    });
-// }
-// function mostrarImagen(id) {
-//     const imagen = document.createElement('picture');
-//     imagen.innerHTML = ` 
-//         <source srcset="build/img/grande/${id}.avif" type="image/avif">
-//         <source srcset="build/img/grande/${id}.webp" type="image/webp">
-//         <img loading="lazy" width="200" height="300" src="build/img/grande/${id}.jpg" alt="imagen galeria">
-//     `;
-//     //crear el overlay con la imagen
-//     const overlay = document.createElement('DIV');
-//     overlay.appendChild(imagen);
-//     overlay.classList.add('overlay');
-//     overlay.onclick = function (){
-//         const body = document.querySelector('body');
-//         body.classList.remove('fijar-body');
-//         overlay.remove();
-//     }
-//     //Cerarr modal
-//     const cerrarModal = document.createElement('P');
-//     cerrarModal.textContent = 'X';
-//     cerrarModal.classList.add('btn-cerrar');
-//     cerrarModal.onclick = function(){
-//         const body = document.querySelector('body');
-//         body.classList.remove('fijar-body');
-//         overlay.remove();
-//     }
-//     overlay.appendChild(cerrarModal);
-    
-//     // Añadir al html
-//     const body = document.querySelector('body');
-//     body.appendChild(overlay);
-//     body.classList.add('fijar-body');
-// }
+    } 
+});
