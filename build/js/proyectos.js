@@ -224,6 +224,7 @@ const proyectos = [
         document.querySelector('.btn_cerrar').addEventListener('click',()=>{
           overlay.style.opacity = 0;
           overlay.style.visibility = 'hidden';
+          location.reload();
           });
           // recorrer arreglo
           contenedor.addEventListener('click', function(evnt){
